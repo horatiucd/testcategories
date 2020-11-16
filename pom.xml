@@ -1,0 +1,88 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+  	<groupId>com.hcd</groupId>
+  	<artifactId>testcategories</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<description>Sample Maven Project that differentiate between Unit and Integration tests at runtime.</description>
+  
+  	<properties>		
+		<test.categories/>
+	</properties>
+  
+  	<profiles>
+  		<!-- Executes Unit, Integration and non-categorized Tests -->
+  		<profile>
+			<id>all-tests</id>			
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<build.profile.id>all-tests</build.profile.id>
+				<test.categories/>
+			</properties>
+		</profile>
+		<!-- Executes Unit Tests -->
+		<profile>
+			<id>unit-tests</id>			
+			<properties>
+				<build.profile.id>unit-tests</build.profile.id>
+				<test.categories>com.hcd.testcategories.config.UnitTests</test.categories>
+			</properties>
+		</profile>
+		<!-- Executes Integration Tests -->
+		<profile>
+			<id>integration-tests</id>
+			<properties>
+				<build.profile.id>integration-tests</build.profile.id>
+				<test.categories>com.hcd.testcategories.config.IntegrationTests</test.categories>
+			</properties>
+		</profile>
+	</profiles>
+  
+  	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>	
+					<version>3.8.0</version>
+					<configuration>
+						<release>11</release>
+						<includeEmptyDirs>true</includeEmptyDirs>
+					</configuration>					
+				</plugin>				
+  				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.0</version>
+					<configuration>						
+						<groups>${test.categories}</groups>
+					</configuration>
+				</plugin>  				
+  			</plugins>
+  		</pluginManagement>
+  		
+  		<plugins>
+  			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>				
+			</plugin>	
+  		</plugins>
+  	</build>
+  	  	
+  	<dependencies>
+  		<dependency>
+			<groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.13</version>
+			<scope>test</scope>		      	
+		</dependency>			
+	</dependencies>
+	
+</project>
