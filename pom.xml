@@ -18,24 +18,21 @@
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-			<properties>
-				<build.profile.id>all-tests</build.profile.id>
+			<properties>				
 				<test.categories/>
 			</properties>
 		</profile>
 		<!-- Executes Unit Tests -->
 		<profile>
 			<id>unit-tests</id>			
-			<properties>
-				<build.profile.id>unit-tests</build.profile.id>
+			<properties>				
 				<test.categories>com.hcd.testcategories.config.UnitTests</test.categories>
 			</properties>
 		</profile>
 		<!-- Executes Integration Tests -->
 		<profile>
 			<id>integration-tests</id>
-			<properties>
-				<build.profile.id>integration-tests</build.profile.id>
+			<properties>				
 				<test.categories>com.hcd.testcategories.config.IntegrationTests</test.categories>
 			</properties>
 		</profile>
